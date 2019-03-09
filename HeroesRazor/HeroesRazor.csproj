@@ -7,12 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Components\Shared\hero-detail.razor" />
+    <Content Remove="Components\Shared\hero-list.razor" />
+    <Content Remove="Components\Shared\list-header.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Server" Version="3.0.0-preview3-19153-02" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview3-19153-02" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Heroes.Shared\Heroes.Shared.csproj" />
+    <ProjectReference Include="..\Heroes.UI\Heroes.UI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

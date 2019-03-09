@@ -1,65 +1,84 @@
-﻿@page "/about"
-@inject IJSRuntime JSRuntime
-<div class="content-container">
-	<div class="content-title-group not-found">
-		<h2 class="title">Tour of Heroes</h2>
-		<p>
-			This project was created to help represent a fundamental app written
-			with Razor Components. The heroes and villains theme is used throughout the app.
-		</p>
-		<p>by <a href="http://twitter.com/robzelt">Rob Zelt</a></p>
-		<p>Original projects by <a href="http://twitter.com/john_papa">John Papa</a></p>
-		<br />
-		<h2 class="title">Why</h2>
-		<p>
-			Inspired by John and his love of JavaScript and his open view on
-			"which framework is best for you?" I decided to create a version of his
-			'Heroes' sample application written using ASP.NET Razor Components. It was
-			a great learning experience for me, and hopefully others as well. I will
-			be making all of the code available shortly.
+﻿@page "/villains"
+@using Heroes.Shared
+@using Heroes.UI.Areas.Components.Shared
+@using Microsoft.AspNetCore.Components.Services
 
-		</p>
-		<br />
-		<h2 class="title">Comparative Apps</h2>
-		<ul>
-			<li>
-				<a href="https://github.com/johnpapa/heroes-angular">github.com/johnpapa/heroes-angular</a>
-			</li>
-			<li>
-				<a href="https://github.com/johnpapa/heroes-react">github.com/johnpapa/heroes-react</a>
-			</li>
-			<li>
-				<a href="https://github.com/johnpapa/heroes-vue">github.com/johnpapa/heroes-vue</a>
-			</li>
-			<li>
-				<a href="https://github.com/robzelt/heroes-razor">github.com/robzelt/heroes-razor</a>
-			</li>
-		</ul>
-		<br />
-		<h2 class="title">Live Demos</h2>
-		<p>Hosted in <a href="https://aka.ms/jp-free">Azure</a></p>
+@addTagHelper *, Heroes.UI
 
-		<ul>
-			<li>
-				<a href="https://papa-heroes-angular.azurewebsites.net">Tour of Heroes with Angular</a>
-			</li>
-			<li>
-				<a href="https://papa-heroes-react.azurewebsites.net">Tour of Heroes with React</a>
-			</li>
-			<li>
-				<a href="https://papa-heroes-vue.azurewebsites.net">Tour of Heroes with Vue</a>
-			</li>
-			<li>
-				<a href="https://papa-heroes-razor.azurewebsites.net">Tour of Heroes with Razor Components</a>
-			</li>
-		</ul>
-	</div>
+@inject HeroState HeroState
+
+
+
+<div>
+	<list_header Title="Villains" OnAdd="addVillain"></list_header>
+</div>
+<div>
+	@if (selectedHero == null)
+	{
+	<hero_list heroes="HeroState.Villains" OnSelect="onSelectedHero" OnDelete="askToDelete" />
+
+	}
+	else
+	{
+	<hero_detail hero="@selectedHero" OnCancelEdit="onCancelEdit" OnSave="onSave" />
+	}
+
+	<Modal IsOpen="@ModalIsOpen" Message="@modalMessage" OnNo="closeModal" OnYes="deleteHero" />
+
 </div>
 
-
-
 @functions {
+	bool ModalIsOpen = false;
+	Hero selectedHero = null;
+	string modalMessage = "";
 
-	
+	void onSelectedHero(Hero hero)
+	{
+		selectedHero = hero;
+		StateHasChanged();
+	}
+
+	void onCancelEdit(Hero hero)
+	{
+		selectedHero = null;
+		StateHasChanged();
+	}
+	void onSave(Hero hero)
+	{
+
+		if (hero.Id != null)
+		{
+			HeroState.Villains.First(i => i.Id == hero.Id).Name = hero.Name;
+			HeroState.Villains.First(i => i.Id == hero.Id).Description = hero.Description;
+		}
+		else
+		{
+			hero.Id = hero.Name.Replace(" ", "").ToLower();
+			HeroState.Villains.Add(hero);
+		}
+		selectedHero = null;
+		StateHasChanged();
+	}
+	void askToDelete(Hero heroToDelete)
+	{
+		ModalIsOpen = true;
+		modalMessage = $"Would you like to delete {heroToDelete.Name}?";
+		StateHasChanged();
+	}
+	void closeModal()
+	{
+		ModalIsOpen = false;
+		StateHasChanged();
+	}
+	void deleteHero()
+	{
+		ModalIsOpen = false;
+		StateHasChanged();
+	}
+	void addVillain()
+	{
+		selectedHero = new Hero();
+		StateHasChanged();
+	}
 
 }

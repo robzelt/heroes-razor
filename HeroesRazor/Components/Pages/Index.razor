@@ -1,7 +1,11 @@
 ﻿@page "/"
 @page "/Heroes"
 @using Heroes.Shared
+@using Heroes.UI.Areas.Components.Shared
 @using Microsoft.AspNetCore.Components.Services
+
+@addTagHelper *, Heroes.UI
+
 @inject HeroState HeroState
 @inject IUriHelper UriHelper
 
@@ -17,7 +21,7 @@
 		<hero_detail hero="@selectedHero" OnCancelEdit="onCancelEdit" OnSave="onSave" />
 	}
 
-	<Modal IsOpen="@ModalIsOpen" Message="@modalMessage" OnNo="closeModal" OnYes="deleteHero" />>
+	<Modal IsOpen="@ModalIsOpen" Message="@modalMessage" OnNo="closeModal" OnYes="deleteHero" />
 
 </div>
 

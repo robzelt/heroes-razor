@@ -1,0 +1,131 @@
+﻿/*@import 'bulma/bulma.sass';*/
+.menu-list .active-link,
+.menu-list .router-link-active {
+  color: #3d3d3d;
+  background-color: #682E7A; }
+
+.menu-list .active {
+  color: #fff; }
+
+.menu-list a {
+  color: #3d3d3d; }
+  .menu-list a .active {
+    color: #fff; }
+
+.not-found i {
+  font-size: 20px;
+  margin-right: 8px; }
+
+.not-found .title {
+  letter-spacing: 0px;
+  font-weight: normal;
+  font-size: 24px;
+  text-transform: none; }
+
+header {
+  font-weight: bold;
+  font-family: Arial; }
+  header span {
+    letter-spacing: 0px; }
+    header span.tour {
+      color: #fff; }
+    header span.of {
+      color: #ccc; }
+    header span.heroes {
+      color: #a452bF; }
+  header .navbar-item.nav-home {
+    border: 3px solid transparent;
+    border-radius: 0%; }
+    header .navbar-item.nav-home:hover {
+      border-right: 3px solid #a452bF;
+      border-left: 3px solid #a452bF; }
+  header .fab {
+    font-size: 24px; }
+    header .fab.js-logo {
+      color: #a452bF; }
+  header .buttons i .fab {
+    color: #fff;
+    margin-left: 20px;
+    margin-right: 10px; }
+    header .buttons i .fab:hover {
+      color: #a452bF; }
+
+.edit-detail .input[readonly] {
+  background-color: #fafafa; }
+
+.content-title-group {
+  margin-bottom: 16px; }
+  .content-title-group h2 {
+    border-left: 16px solid #682E7A;
+    border-bottom: 2px solid #682E7A;
+    padding-left: 8px;
+    padding-right: 16px;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #555;
+    letter-spacing: 0px; }
+    .content-title-group h2:hover {
+      color: #682E7A; }
+  .content-title-group button.button {
+    border: 0;
+    color: #999; }
+    .content-title-group button.button:hover {
+      color: #682E7A; }
+
+ul.list {
+  box-shadow: none; }
+
+div.card-content {
+  background-color: #fafafa;
+  background-color: #fafafa; }
+  div.card-content .name {
+    font-size: 28px;
+    color: #000; }
+  div.card-content .description {
+    font-size: 20px;
+    color: #999; }
+
+.card {
+  margin-bottom: 2em; }
+
+label.label {
+  font-weight: normal; }
+
+p.card-header-title {
+  background-color: #682E7A;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #fff;
+  display: block;
+  padding-left: 24px; }
+
+.card-footer button {
+  font-size: 16px;
+  color: #888; }
+  .card-footer button i {
+    margin-right: 10px; }
+  .card-footer button:hover {
+    color: #682E7A; }
+
+.modal-card-foot button {
+  display: inline-block;
+  width: 80px; }
+
+.modal-card-head,
+.modal-card-body {
+  text-align: center; }
+
+.field {
+  margin-bottom: 0.75rem; }
+
+.navbar-burger {
+  margin-left: auto; }
+
+button.link {
+  background: none;
+  border: none;
+  cursor: pointer; }
+
+.active {
+  color: #fff;
+  background-color: #682E7A; }

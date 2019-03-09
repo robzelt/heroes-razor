@@ -1,0 +1,77 @@
+﻿@page "/villains"
+@using Heroes.Shared
+@inject HeroState HeroState
+
+<div>
+	<list_header Title="Villains" OnAdd="addVillain"></list_header>
+</div>
+<div>
+	@if (selectedHero == null)
+	{
+		<hero_list heroes="HeroState.Villains" OnSelect="onSelectedHero" OnDelete="askToDelete" />
+
+	}
+	else
+	{
+		<hero_detail hero="@selectedHero" OnCancelEdit="onCancelEdit" OnSave="onSave" />
+	}
+
+	<Modal IsOpen="@ModalIsOpen" Message="@modalMessage" OnNo="closeModal" OnYes="deleteHero" />>
+
+</div>
+
+@functions {
+	bool ModalIsOpen = false;
+	Hero selectedHero = null;
+	string modalMessage = "";
+
+	void onSelectedHero(Hero hero)
+	{
+		selectedHero = hero;
+		StateHasChanged();
+	}
+
+	void onCancelEdit(Hero hero)
+	{
+		selectedHero = null;
+		StateHasChanged();
+	}
+	void onSave(Hero hero)
+	{
+
+		if (hero.Id != null)
+		{
+			HeroState.Villains.First(i => i.Id == hero.Id).Name = hero.Name;
+			HeroState.Villains.First(i => i.Id == hero.Id).Description = hero.Description;
+		}
+		else
+		{
+			hero.Id = hero.Name.Replace(" ", "").ToLower();
+			HeroState.Villains.Add(hero);
+		}
+		selectedHero = null;
+		StateHasChanged();
+	}
+	void askToDelete(Hero heroToDelete)
+	{
+		ModalIsOpen = true;
+		modalMessage = $"Would you like to delete {heroToDelete.Name}?";
+		StateHasChanged();
+	}
+	void closeModal()
+	{
+		ModalIsOpen = false;
+		StateHasChanged();
+	}
+	void deleteHero()
+	{
+		ModalIsOpen = false;
+		StateHasChanged();
+	}
+	void addVillain()
+	{
+		selectedHero = new Hero();
+		StateHasChanged();
+	}
+
+}

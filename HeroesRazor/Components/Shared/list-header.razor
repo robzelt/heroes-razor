@@ -1,0 +1,23 @@
+<div class="content-title-group">
+	<div>
+		<h2 class="title">@Title</h2>
+	</div>
+
+	<button class="button add-button" onclick=@(() => OnAdd()) aria-label="add">
+		<i class="fas fa-plus" aria-hidden="true"></i>
+	</button>
+	<button class="button refresh-button"
+			onclick=@(() => OnRefresh())
+			aria-label="refresh">
+		<i class="fas fa-sync" aria-hidden="true"></i>
+	</button>
+</div>
+
+@functions {
+
+	[Parameter] string Title { get; set; }
+
+
+	[Parameter] Action OnAdd { get; set; }
+	[Parameter] Action OnRefresh { get; set; }
+}

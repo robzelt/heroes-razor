@@ -1,0 +1,32 @@
+@using Heroes.Shared
+
+<div>
+	<ul class="list">
+		@foreach (var hero in heroes)
+		{
+			<li>
+				<div class="card">
+					@*<CardContent :name="hero.name" :description="hero.description" />*@
+					<div class="card-content">
+						<div class="content">
+							<div class="name">@hero.Name</div>
+							<div class="description">@hero.Description</div>
+						</div>
+					</div>
+					<footer class="card-footer">
+						<button onclick=@(() => OnDelete(hero)) aria-label="Delete" tabindex="0" data-index="0" data-id="HeroAslaug" class="link card-footer-item delete-item"><i class="fas fa-trash"></i><span>Delete</span></button>
+						<button onclick=@(() => OnSelect(hero)) aria-label="Edit" tabindex="0" data-index="0" data-id="HeroAslaug" class="link card-footer-item edit-item"><i class="fas fa-edit"></i><span>Edit</span></button>
+					</footer>
+				</div>
+			</li>
+		}
+	</ul>
+</div>
+
+@functions {
+	[Parameter] List<Hero> heroes { get; set; }
+
+	[Parameter] Action<Hero> OnSelect { get; set; }
+	[Parameter] Action<Hero> OnDelete { get; set; }
+
+}

@@ -27,6 +27,6 @@ Hosted in [Azure](https://aka.ms/jp-free)
 
 ## Problems or Suggestions
 
-[Open an issue here](/issues)
+[Open an issue here](https://github.com/robzelt/heroes-razor/issues)
 
 ## Thank You

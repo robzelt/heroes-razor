@@ -30,6 +30,8 @@
 @functions {
 	bool ModalIsOpen = false;
 	Hero selectedHero = null;
+	Hero heroToDelete = null;
+
 	string modalMessage = "";
 
 	void onSelectedHero(Hero hero)
@@ -59,20 +61,24 @@
 		selectedHero = null;
 		StateHasChanged();
 	}
-	void askToDelete(Hero heroToDelete)
+	void askToDelete(Hero targetToDelete)
 	{
 		ModalIsOpen = true;
-		modalMessage = $"Would you like to delete {heroToDelete.Name}?";
+		modalMessage = $"Would you like to delete {targetToDelete.Name}?";
+		heroToDelete = targetToDelete;
 		StateHasChanged();
 	}
 	void closeModal()
 	{
+		heroToDelete = null;
 		ModalIsOpen = false;
 		StateHasChanged();
 	}
 	void deleteHero()
 	{
 		ModalIsOpen = false;
+		HeroState.Heroes.Remove(HeroState.Villains.First(i => i.Id == heroToDelete.Id));
+		heroToDelete = null;
 		StateHasChanged();
 	}
 	void addVillain()

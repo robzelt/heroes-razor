@@ -77,7 +77,7 @@
 	void deleteHero()
 	{
 		ModalIsOpen = false;
-		HeroState.Heroes.Remove(HeroState.Villains.First(i => i.Id == heroToDelete.Id));
+		HeroState.Villains.Remove(HeroState.Villains.First(i => i.Id == heroToDelete.Id));
 		heroToDelete = null;
 		StateHasChanged();
 	}
